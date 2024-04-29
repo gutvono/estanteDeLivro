@@ -1,9 +1,40 @@
-﻿int QtdLivros = 0;
-Livro[] Livros;
+﻿int QtdLivros = 0, opcao = 0;
+Livro[] Livros = new Livro[1];
 
-Console.Write("Informe a quantidade de livros que deseja guardar: ");
-QtdLivros = int.Parse(Console.ReadLine());
-Livros = new Livro[QtdLivros];
+void Menu()
+{
+    do
+    {
+        Console.WriteLine("Insira o numero relacionado ao que você precisa:");
+        Console.WriteLine("1 - Criar estante de livros;");
+        Console.WriteLine("2 - Adicionar livros na estante;");
+        Console.WriteLine("3 - Mostrar livros da estante;");
+        Console.WriteLine("4 - Sair do sistema.");
+        opcao = int.Parse(Console.ReadLine());
+
+        switch (opcao)
+        {
+            case 1:
+                CriarEstante();
+                break;
+            case 2:
+                AdicionarLivros();
+                break;
+            case 3:
+                MostrarLivros();
+                break;
+            default:
+                break;
+        }
+    } while (opcao != 4);
+}
+
+void CriarEstante()
+{
+    Console.Write("Informe a quantidade de livros que deseja guardar: ");
+    QtdLivros = int.Parse(Console.ReadLine());
+    Livros = new Livro[QtdLivros];
+}
 
 Livro CriarLivro(int indice)
 {
@@ -34,14 +65,23 @@ Livro CriarLivro(int indice)
     return livro;
 }
 
-for (int l = 0; l < QtdLivros; l++)
+void AdicionarLivros()
 {
-    Livros[l] = CriarLivro(l);
+    for (int l = 0; l < QtdLivros; l++)
+    {
+        Livros[l] = CriarLivro(l);
+    }
 }
 
-for (int l = 0; l < QtdLivros; l++)
+void MostrarLivros()
 {
-    Console.WriteLine("\n--------------------------------------------------\n");
-    Livros[l].ImprimirLivro();
-    Console.WriteLine("\n--------------------------------------------------\n");
+    for (int l = 0; l < QtdLivros; l++)
+    {
+        Console.WriteLine("\n--------------------------------------------------\n");
+        Livros[l].ImprimirLivro();
+        Console.WriteLine("\n--------------------------------------------------\n");
+    }
 }
+
+//-----PROGRAMA-----
+Menu();
